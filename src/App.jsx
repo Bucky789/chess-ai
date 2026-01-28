@@ -229,7 +229,7 @@ export default function ChessGame() {
   const handleStartGame = () => {
     setPlayerNames({
       white: tempNames.white || "Player 1",
-      black: aiMode ? "Stockfish AI" : tempNames.black || "Player 2",
+      black: aiMode ? "AI" : tempNames.black || "Player 2",
     });
     setGameStarted(true);
   };
