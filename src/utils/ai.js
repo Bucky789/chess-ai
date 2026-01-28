@@ -1,5 +1,4 @@
 // utils/ai.js
-// Stockfish via CDN + Blob Worker
 // GUARANTEES: getBestMove NEVER returns null
 
 let sfWorker = null;
@@ -16,15 +15,8 @@ async function initStockfish() {
   
 
   readyPromise = new Promise(async (resolve) => {
-    const response = await fetch(
-      'https://cdnjs.cloudflare.com/ajax/libs/stockfish.js/10.0.2/stockfish.js'
-    );
-    const script = await response.text();
 
-    const blob = new Blob([script], { type: 'application/javascript' });
-    const workerUrl = URL.createObjectURL(blob);
-
-    sfWorker = new Worker(workerUrl);
+    sfWorker = new Worker('/stockfish/stockfish.js');
 
     sfWorker.onmessage = (e) => {
       const msg = e.data;
