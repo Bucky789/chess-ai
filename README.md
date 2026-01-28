@@ -1,16 +1,72 @@
-# React + Vite
+# ♟️ Chess.AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web-based chess application built with React, featuring human vs human play and human vs Stockfish AI.  
+Includes full chess rules support such as castling, check/checkmate detection, move history, and pawn promotion.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ♜ Human vs Human
+- ♚ Human vs Stockfish AI (Web Worker)
+- ♕ Pawn Promotion (Queen, Rook, Bishop, Knight)
+- ♖ Castling (King & Queen side)
+- ♔ Check, Checkmate & Stalemate detection
+- 📜 Move history with navigation
+- ♻️ Captured pieces tracking
+- 🎨 Clean, modern UI
 
-## React Compiler
+## 🧠 AI Engine
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Uses **Stockfish.js** (v10) via CDN
+- Runs inside a Web Worker (non-blocking)
+- Auto-queen promotion for AI (stable & fast)
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React**
+- **JavaScript (ES6+)**
+- **Stockfish.js**
+- **Web Workers**
+- **CSS (custom styling)**
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm or yarn
+
+### Install & Run Locally
+
+```bash
+npm install
+npm run dev
+```
+
+### Build for Production
+```npm run build```
+### 🌐 Deployment
+This app is optimized for static hosting platforms such as:
+
+-Vercel (recommended)
+
+-Netlify
+
+No backend required.
+
+📂 Project Structure
+
+src/
+
+ ├─ App.jsx
+ 
+ ├─ utils/
+ 
+ │   ├─ chessLogic.js
+ 
+ │   └─ ai.js
+ 
+ └─ assets/
+ 
+📌 Notes
+AI under-promotion is intentionally simplified to queen promotion for stability.
+
+The chess engine logic is custom-built (no external chess libraries).
