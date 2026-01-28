@@ -14,6 +14,15 @@ export function createInitialBoard() {
   ];
 }
 
+const DEFAULT_CASTLING_RIGHTS = {
+  wKMoved: false,
+  wLRookMoved: false,
+  wRRookMoved: false,
+  bKMoved: false,
+  bLRookMoved: false,
+  bRRookMoved: false,
+};
+
 // Piece utilities
 export function isWhitePiece(piece) {
   return piece && piece === piece.toUpperCase();
@@ -208,8 +217,8 @@ function getKingMoves(
   row,
   col,
   color,
-  castlingRights,
-  forAttack = false,
+  castlingRights = DEFAULT_CASTLING_RIGHTS,
+  forAttack = false
 ) {
   const moves = [];
   const kingMoves = [
@@ -436,7 +445,7 @@ export function isCheckmate(board, color) {
     for (let col = 0; col < 8; col++) {
       const piece = board[row][col];
       if (piece && getPieceColor(piece) === color) {
-        const moves = getLegalMoves(board, row, col, color);
+        const moves = getLegalMoves(board, row, col, color, DEFAULT_CASTLING_RIGHTS);
         if (moves.length > 0) return false;
       }
     }
@@ -454,7 +463,7 @@ export function isStalemate(board, color) {
     for (let col = 0; col < 8; col++) {
       const piece = board[row][col];
       if (piece && getPieceColor(piece) === color) {
-        const moves = getLegalMoves(board, row, col, color);
+        const moves = getLegalMoves(board, row, col, color, DEFAULT_CASTLING_RIGHTS);
         if (moves.length > 0) return false;
       }
     }
