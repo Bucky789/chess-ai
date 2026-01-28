@@ -115,10 +115,10 @@ export default function ChessGame() {
     const style = document.createElement("style");
     style.textContent = `
       :root {
-        --board-size: min(90vw, 70vh);
+        --board-size: min(70vw, 70vh);
         --square-size: calc(var(--board-size) / 8);
       }
-      .chess-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100vw; height: 100vh; padding: 0; margin: 0; min-height: 100vh; font-family: 'Inter', sans-serif; color: white; position: relative; }
+      .chess-container { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; width: 100vw; height: 100vh; padding: 0; margin: 0; min-height: 100vh; font-family: 'Inter', sans-serif; color: white; position: relative; }
       .chess-layout { display: flex; gap: 24px; width: 100%; max-width: 1200px; justify-content: center; flex-wrap: wrap; }
       .chess-board { display: grid; grid-template-columns: repeat(8, var(--square-size)); width: var(--board-size); height: var(--board-size); border: 6px solid #334155; border-radius: 8px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
       .chess-square { width: var(--square-size); height: var(--square-size); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
@@ -128,7 +128,7 @@ export default function ChessGame() {
       .can-capture { background: rgba(239,68,68,0.35) !important; box-shadow: inset 0 0 15px rgba(239,68,68,0.6); }
       .piece-img { width: 85%; height: 85%; pointer-events: none; filter: drop-shadow(0 4px 2px rgba(0,0,0,0.3)); }
       .sidebar { flex: 1; min-width: 260px; max-width: 320px; display: flex; flex-direction: column; gap: 14px; }
-      .player-card, .control-panel { background: rgba(30,41,59,0.8); backdrop-filter: blur(10px); padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+      .player-card, .control-panel { background: rgba(30,41,59,0.8); backdrop-filter: blur(10px); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
       .active-turn { border: 2px solid #3b82f6; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
       .captured-row { display: flex; flex-wrap: wrap; gap: 4px; min-height: 24px; }
       .cap-img { width: 22px; height: 22px; }
@@ -178,6 +178,49 @@ export default function ChessGame() {
 
       .chess-container, .chess-container * { user-select: none; -webkit-user-select: none; }
       .piece-img, .cap-img { -webkit-user-drag: none; pointer-events: none; }
+
+      @media (max-width: 768px) {
+  :root {
+    --board-size: 92vw;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .chess-container {
+    justify-content: flex-start;
+    min-height: 100svh;
+  }
+
+  .chess-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chess-board {
+    margin: 0;
+    box-shadow: none;
+    border-width: 3px;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
+  }
+
+  .history-panel {
+    height: 110px;
+  }
+
+  h1 {
+    font-size: 32px !important;
+    margin: 6px 0 10px 0 !important;
+  }
+}
+
     `;
     document.head.appendChild(style);
   }, []);
@@ -305,7 +348,7 @@ export default function ChessGame() {
       {!gameStarted && (
         <div className="setup-overlay">
           <div className="setup-box">
-            <h1>CHESS.AI</h1>
+            <h1>WhiteToMove</h1>
             <h2>NEW GAME</h2>
             <div className="input-group">
               <label>PLAYER 1 (WHITE)</label>
@@ -359,10 +402,10 @@ export default function ChessGame() {
           marginBottom: "20px",
         }}
       >
-        CHESS.AI
+        WhiteToMove
       </h1>
 
-      <div className="chess-layout">
+      <div className="chess-layout layout-desktop">
         {pendingPromotion && (
           <div className="game-over-overlay">
             <div className="modal-box">
